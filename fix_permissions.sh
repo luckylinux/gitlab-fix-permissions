@@ -51,8 +51,29 @@ sudo chown -R "${username}":"${groupname}" /var/log/gitlab/puma
 sudo chown -R "${username}":"${groupname}" /opt/gitlab/var/
 sudo chown -R "${username}":"${groupname}" /var/opt/gitlab/gitaly/
 
+# Find Residual files Owned by the default <git> Group
+mapfile -t wrongfilegroup < <( find /var/opt/gitlab -group git )
+
+# Apply new Group Membership
+for file in "${wrongfilegroup}"
+do
+    # ONLY change Group
+    chgrp "{groupname}" "${file}"
+done
+
+# Find Residual files Owned by the default <git> User
+mapfile -t wrongfileowner < <( find /var/opt/gitlab -user git )
+
+# Apply new User Membership
+for file in "${wrongfileowner}"
+do
+    # ONLY change User
+    chown "{username}" "${file}"
+done
+
 # Reconfigure again
 sudo gitlab-ctl reconfigure
 
 # Restart all Services again
 sudo gitlab-ctl restart
+
