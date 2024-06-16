@@ -35,6 +35,13 @@ sudo chown -R "${username}":"${groupname}" /var/opt/gitlab/gitlab-rails/shared/c
 sudo chown -R "${username}":gitlab-www /var/opt/gitlab/gitlab-rails/shared/pages
 sudo chown -R "${username}":"${groupname}" /var/opt/gitlab/gitlab-rails/shared/uploads
 sudo chown -R "${username}":"${groupname}" /var/opt/gitlab/gitlab-ci/builds
+
+# Suggested by gitlab check
+sudo chmod 700 /var/opt/gitlab/.ssh
+sudo touch /var/opt/gitlab/.ssh/authorized_keys
+sudo chmod 600 /var/opt/gitlab/.ssh/authorized_keys
+
+# Fix SSH Keys Permissions
 sudo chown -R "${username}":"${groupname}" /var/opt/gitlab/.ssh
 
 # Based on the Log / Process Analysis detailed above
