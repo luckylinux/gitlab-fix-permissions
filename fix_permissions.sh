@@ -13,6 +13,21 @@ groupname="gitlab-server"
 # - gitlab-ctl tail puma -> which folder has permissions errors ?
 # - gitlab-ctl tail gitaly -> which folder has permissions errors ?
 
+# Run Gitlab Reconfigure
+sudo gitlab-ctl reconfigure
+
+# Run Checks
+sudo gitlab-rake gitlab:check
+
+# Stop all Gitlab Services
+sudo gitlab-ctl stop
+
+# Restart runsv Service
+sudo systemctl restart gitlab-runsvdir.service
+
+# Restart all Gitlab Services
+sudo gitlab-ctl restart
+
 # Fix Permissions
 # According to: https://docs.gitlab.com/omnibus/settings/configuration.html#change-the-name-of-the-git-user-or-group
 sudo chown -R "${username}":"${groupname}" /mnt/git/repositories
