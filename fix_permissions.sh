@@ -1,26 +1,11 @@
 #!/bin/bash
 
-# Change in /etc/gitlab/gitlab.rc
-# ENABLE THE FOLLOWING LINES
-#
-# user['username'] = "gitlab-server"
-# user['group'] = "gitlab-server"
-# user['uid'] = 2505
-# user['gid'] = 2505
-#
-##! The shell for the git user
-# user['shell'] = "/bin/bash"
-#
-##! The home directory for the git user
-# user['home'] = "/var/opt/gitlab"
-#
+# Define username and groupname
+# <username> MUST match user['username'] in /etc/gitlab/gitlab.rb
+username="gitlab-server"
 
-# Disable Account and Storage Management
-# Prevent gitlab from setting wrong ACLs, Mask (when doing chmod this can result in mask: ---), etc
-#manage_accounts['enable'] = false
-#manage_storage_directories['enable'] = false
-#manage_storage_directories['manage_etc'] = false
-
+# <groupname> MUST match user['group'] in /etc/gitlab/gitlab.rb
+groupname="gitlab-server"
 
 # Fix Permissions Error
 # Find out Issues by looking at:
@@ -30,12 +15,12 @@
 
 # Fix Permissions
 # According to: https://docs.gitlab.com/omnibus/settings/configuration.html#change-the-name-of-the-git-user-or-group
-sudo chown -R gitlab-server:gitlab-server /mnt/git/repositories
-sudo chown -R gitlab-server:gitlab-server /var/opt/gitlab/gitlab-rails/uploads
+sudo chown -R "${username}":"${groupname}" /mnt/git/repositories
+sudo chown -R "${username}":"${groupname}" /var/opt/gitlab/gitlab-rails/uploads
 
 # Based on the Log / Process Analysis detailed above
-sudo chown -R gitlab-server:gitlab-server /var/opt/gitlab/gitlab-rails/sockets/
-sudo chown -R gitlab-server:gitlab-server /opt/gitlab/embedded/service/gitlab-rails/log/
-sudo chown -R gitlab-server:gitlab-server /var/log/gitlab/puma
-sudo chown -R gitlab-server:gitlab-server /opt/gitlab/var/
-sudo chown -R gitlab-server:gitlab-server /var/opt/gitlab/gitaly/
+sudo chown -R "${username}":"${groupname}" /var/opt/gitlab/gitlab-rails/sockets/
+sudo chown -R "${username}":"${groupname}" /opt/gitlab/embedded/service/gitlab-rails/log/
+sudo chown -R "${username}":"${groupname}" /var/log/gitlab/puma
+sudo chown -R "${username}":"${groupname}" /opt/gitlab/var/
+sudo chown -R "${username}":"${groupname}" /var/opt/gitlab/gitaly/
