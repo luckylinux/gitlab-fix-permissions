@@ -109,7 +109,27 @@ manage_storage_directories['manage_etc'] = false
 ```
 
 # Fix Permission Errors
+## Get Started
 Run
 ```
 ./fix_permissions.sh
+```
+
+## Troubleshooting
+
+### Which service keeps rebooting ? Looks for Services which have a very low Uptime Value.
+In my case `puma` and `gitaly`:
+```
+gitlab-ctl status
+```
+
+### Analyse Service Logs. Look for Errors which indicate Folder/File Permission Errors
+Which File/Folder Permissions is preventing `puma` from working correctly ?
+```
+gitlab-ctl tail puma
+```
+
+Which File/Folder Permissions is preventing `gitaly` from working correctly ?
+```
+gitlab-ctl tail gitaly
 ```
