@@ -10,6 +10,21 @@ Clone Repository:
 git clone https://github.com/luckylinux/gitlab-fix-permissions.git
 ```
 
+Change Folder:
+```
+cd gitlab-fix-permissions
+```
+
+Copy Example Configuration:
+```
+cp config.sh.example config.sh
+```
+
+Customize Configuration according to your Setup:
+```
+nano config.sh
+```
+
 # Preface
 I am storing the `git-data` folder on NFS, mounted on `/mnt/git`.
 

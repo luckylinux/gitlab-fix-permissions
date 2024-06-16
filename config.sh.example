@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Define username and groupname
+# <username> MUST match user['username'] in /etc/gitlab/gitlab.rb
+username="gitlab-server"
+
+# <groupname> MUST match user['group'] in /etc/gitlab/gitlab.rb
+groupname="gitlab-server"
